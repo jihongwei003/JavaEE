@@ -1,0 +1,2 @@
+在glassfish\bin中打开命令窗口
+输入：asadmin add-resources 项目路径下的glassfish-resources.xml
