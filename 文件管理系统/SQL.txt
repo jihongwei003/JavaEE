@@ -1,0 +1,87 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema gcgj
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema gcgj
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `gcgj` DEFAULT CHARACTER SET utf8 ;
+USE `gcgj` ;
+
+-- -----------------------------------------------------
+-- Table `gcgj`.`position`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `gcgj`.`position` (
+  `PosID` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`PosID`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 9
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `gcgj`.`users`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `gcgj`.`users` (
+  `userID` INT(11) NOT NULL AUTO_INCREMENT,
+  `userName` VARCHAR(45) NULL DEFAULT NULL,
+  `password` VARCHAR(45) NULL DEFAULT NULL,
+  `position` INT(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`userID`),
+  INDEX `position_idx` (`position` ASC),
+  CONSTRAINT `position`
+    FOREIGN KEY (`position`)
+    REFERENCES `gcgj`.`position` (`PosID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 15
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `gcgj`.`files`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `gcgj`.`files` (
+  `fileID` INT(11) NOT NULL AUTO_INCREMENT,
+  `file` VARCHAR(45) NULL DEFAULT NULL,
+  `owner` INT(11) NULL DEFAULT NULL,
+  `authority` BLOB NULL DEFAULT NULL,
+  `fileName` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`fileID`),
+  INDEX `owner_idx` (`owner` ASC),
+  CONSTRAINT `owner`
+    FOREIGN KEY (`owner`)
+    REFERENCES `gcgj`.`users` (`userID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 32
+DEFAULT CHARACTER SET = utf8;
+
+
+
+insert into gcgj.position values(1, "领导");
+insert into gcgj.position values(2, "教务管理员");
+insert into gcgj.position values(3, "财务管理员");
+insert into gcgj.position values(4, "党务管理员");
+insert into gcgj.position values(5, "资产管理员");
+insert into gcgj.position values(6, "人事管理员");
+insert into gcgj.position values(7, "学生管理员");
+insert into gcgj.position values(8, "教师");
+
+insert into gcgj.users values(1, "1", "1", 1);
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>上传文件</title>
+    </h:head>
+    <h:body onload="#{uploadFileController.prepareCreate()}">
+        <p:layout fullPage="true" > 
+            <p:layoutUnit position="center">
+                <h1 align="center">上传文件</h1>  
+                <h:form enctype= "multipart/form-data">
+                    <div align="center">
+                        <p:panel>
+                            <h:panelGrid columns="2">
+                                <p:outputLabel value="选择文件"/>
+                                <p:fileUpload value="#{uploadFileController.fileUpload}"  mode="simple"
+                                      uploadLabel="导入文件" cancelLabel="取消导入" fileLimit="1" fileLimitMessage="文件导入过了" required="true"/>
+                                <h:outputLabel value="设置下载权限" /> 
+                                
+                                <p:dataList value="#{uploadFileController.checkBoxList}" var="checkBox" type="ordered">                               
+                                    <h:outputText value="#{checkBox.position}" />
+                                    <p:selectBooleanCheckbox value="#{checkBox.isSelected}" />                               
+                                </p:dataList>
+                      
+                            </h:panelGrid>
+                            <h:commandButton action="#{uploadFileController.submit}" value="上传" />
+                            <h:commandButton action="/homePage.xhtml" value="返回" />
+                        </p:panel>
+                    </div>
+                </h:form>
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
+
+</html>

@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>注册</title>
+    </h:head>
+    <h:body onload="#{userRegistrationController.prepareCreate()}">
+        <p:layout fullPage="true" >
+            <p:layoutUnit position="center">
+                <h1 align="center">用户注册</h1>  
+                <h:form enctype= "multipart/form-data">
+                    <div align="center">
+                        <p:panel>
+                            <p:panelGrid columns="2">        
+                                
+                                <p:outputLabel value="用户名" for="userName" />
+                                <p:inputText id="userName" value="#{userRegistrationController.selected.userName}"/>
+                                <p:outputLabel value="密码" for="password" />
+                                <p:inputText id="password" value="#{userRegistrationController.selected.password}"/>
+                                <p:outputLabel value="职务" for="position" />
+                                <p:selectOneMenu id="position" value="#{userRegistrationController.selected.position}">
+                                    <f:selectItems value="#{userRegistrationController.itemsAvailableSelectOne}"/>
+                                </p:selectOneMenu>
+                                
+                                
+                                
+
+                            </p:panelGrid>
+                                <p:commandButton action="/login.xhtml" value="取消" style="margin-top: 20px; margin-right: 30px"/>
+                                <p:commandButton action="#{userRegistrationController.create}" value="注册" style="margin-top: 20px" ajax="false"/>
+                        </p:panel>
+                    </div>
+                </h:form>
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
+
+</html>
